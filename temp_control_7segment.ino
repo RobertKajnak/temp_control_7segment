@@ -1,11 +1,12 @@
 #include "segment.h"
 
+SevenSegment ss;
 void setup() {
-  init_7_IO();
   pinMode(A0, INPUT);
   pinMode(A1,INPUT);
   Serial.begin(9600);
-
+  /*char newMap[8] = {4,5,8,6,7,3,2,9};
+  ss.remap(newMap);*/
 }
 
 void loop() {
@@ -16,7 +17,7 @@ void loop() {
   float scaledValI,scaledValM,scaledValH;
   while (1){
     i++;
-    digit(i,dig);
+    ss.digit(i,dig);
     valM = analogRead(A0);
     valI = analogRead(A1);
     scaledValM = valM*5.0/1024;
@@ -26,12 +27,12 @@ void loop() {
     Serial.print(",L=");
     Serial.print(scaledValM);
     Serial.println();
-    number(scaledValI,1000);
+    ss.number(scaledValI,1000);
     
     if (i==30){
       i=-15;
       dec = !dec;
     }
-    decimal(dec);
+    ss.decimal(dec);
   }
 }

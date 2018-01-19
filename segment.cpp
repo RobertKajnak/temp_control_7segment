@@ -1,17 +1,7 @@
 #include "segment.h"
 
-const int A = 4;//4
-const int B = 5;//5
-const int C = 8;//8
-const int D = 6;//6
-const int E = 7;//7
-const int F = 3;//3
-const int G = 2;//2
-const int H = 9;
-const int ANODE1 = 10;
-const int ANODE2 = 11;
 
-void init_7_IO(){
+SevenSegment::SevenSegment(){
   pinMode(ANODE1, OUTPUT);
   pinMode(ANODE2, OUTPUT);
   pinMode(A, OUTPUT);
@@ -24,8 +14,23 @@ void init_7_IO(){
   pinMode(H, OUTPUT);
 }
 
+SevenSegment::SevenSegment(char * v){
+   SevenSegment();
+   remap(v);
+}
 
-void number(int n,int t){
+void SevenSegment::remap(const char * v){
+  A = *v;
+  B = *(v+1);
+  C = *(v+2);
+  D = *(v+3);
+  E = *(v+4);
+  F = *(v+5);
+  G = *(v+6);
+  H = *(v+7);
+}
+
+void SevenSegment::number(int n,int t){
   int i;
   int a,b;
   if (n < 0){
@@ -46,7 +51,7 @@ void number(int n,int t){
   }
 }
 
-void decimal(char isOn){
+void SevenSegment::decimal(char isOn){
   if (isOn){
     digitalWrite(H, LOW);
   }
@@ -55,7 +60,7 @@ void decimal(char isOn){
   }
 }
 
-void digit(int n, int number){
+void SevenSegment::digit(int n, int number){
 
   if (number){
     digitalWrite(ANODE2, HIGH);
